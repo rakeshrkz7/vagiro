@@ -1,7 +1,7 @@
 import { IImages, IProduct, IVariant } from "../../models/product-lists.mode";
 import { IShopifyImages, IShopifyProduct, IShopifyVariants } from "../../models/shopify_models/products.model";
 
-const productVariantHelper = async(variants: IShopifyVariants[]): Promise<IVariant[]> => {
+const productVariant = async(variants: IShopifyVariants[]): Promise<IVariant[]> => {
     let variantFiltered: IVariant[] = []
     for(const variant of variants) {
         const filteredVariantData: IVariant = {
@@ -20,7 +20,7 @@ const productVariantHelper = async(variants: IShopifyVariants[]): Promise<IVaria
     return variantFiltered;
 };
 
-const imagesHelper = async(images: IShopifyImages[]): Promise<IImages[]> => {
+const images = async(images: IShopifyImages[]): Promise<IImages[]> => {
     let imagesFiltered: IImages[] = []
     for(const image of images) {
         const filteredImageData: IImages = {
@@ -33,7 +33,7 @@ const imagesHelper = async(images: IShopifyImages[]): Promise<IImages[]> => {
     return imagesFiltered;
 };
 
-export const productHelper = async(products: IShopifyProduct[]): Promise<IProduct[]> => {
+export const product = async(products: IShopifyProduct[]): Promise<IProduct[]> => {
     let productFiltered: IProduct[] = []
     for(const product of products) {
         const filteredProductData: IProduct = {
@@ -41,8 +41,8 @@ export const productHelper = async(products: IShopifyProduct[]): Promise<IProduc
             title: product.title,
             created_at: product.created_at,
             status: product.status,
-            variants: await productVariantHelper(product.variants),
-            images: await imagesHelper(product.images)
+            variants: await productVariant(product.variants),
+            images: await images(product.images)
         }
 
         productFiltered.push(filteredProductData);

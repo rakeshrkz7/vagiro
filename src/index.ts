@@ -1,8 +1,10 @@
 import express, { Application, Request, Response, NextFunction} from 'express';
-import { testRoute } from './routes/products.route';
+import { productRoute } from './routes/products.route';
+import { shopInfoRoute } from './routes/shop-info.route';
 const app: Application = express();
 
-app.use('/products', testRoute);
+app.use('/products', productRoute);
+app.use('/shop-info', shopInfoRoute);
 
 app.get('/', (req: Request, res: Response, next: NextFunction) => {
     res.send('Welcome!');
